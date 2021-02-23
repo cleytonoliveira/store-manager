@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const registerNewSale = async () => 'estou no model';
+const registerNewSale = async () => await connection();
 
 module.exports = {
   registerNewSale,
