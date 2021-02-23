@@ -4,7 +4,7 @@
   "description": "Simple CRUD to sales and products",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=mongodb jest --runInBand",
+    "test": "jest --runInBand",
     "start": "nodemon index.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx"
   },
