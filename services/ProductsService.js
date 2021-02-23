@@ -1,6 +1,9 @@
 const { ProductsModel } = require('../models');
 
-const registerNewProduct = async () => await ProductsModel.registerNewProduct();
+const registerNewProduct = async (name, quantity) => {
+  ProductsModel
+    .registerNewProduct(name, quantity);
+};
 
 module.exports = {
   registerNewProduct,
