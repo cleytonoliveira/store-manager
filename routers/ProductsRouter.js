@@ -1,8 +1,13 @@
+const { ProductsController } = require('../controllers');
+const { isValidProductName } = require('../middlewares');
+
 const { Router } = require('express');
 const ProductsRouter = Router();
-const { ProductsController } = require('../controllers');
 
-ProductsRouter.post('/', ProductsController.registerNewProduct);
+ProductsRouter.post('/',
+  isValidProductName,
+  ProductsController.registerNewProduct
+);
 // ProductsRouter.get('/', ProductsController);
 // ProductsRouter.get('/:id', ProductsController);
 // ProductsRouter.put('/:id', ProductsController);
