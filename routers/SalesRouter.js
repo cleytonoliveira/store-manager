@@ -8,7 +8,9 @@ const { SalesController } = require('../controllers');
 SalesRouter.get('/',
   SalesController.getAllSales,
 );
-// SalesRouter.get('/:id', SalesController);
+SalesRouter.get('/:id',
+  SalesController.getSaleById,
+);
 // SalesRouter.put('/:id', SalesController);
 // SalesRouter.delete('/:id', SalesController);
 

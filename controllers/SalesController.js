@@ -17,7 +17,16 @@ const getAllSales = rescue(async (_req, res) => {
     .json({ sales: await SalesService.getAllSales() });
 });
 
+const getSaleById = rescue(async (req, res) => {
+  const { id } = req.params;
+
+  res
+    .status(SUCCESS)
+    .json(await SalesService.getSaleById(id));
+});
+
 module.exports = {
   // registerNewSale,
   getAllSales,
+  getSaleById,
 };
