@@ -15,7 +15,7 @@ const registerNewProduct = rescue(async (req, res) => {
 const getAllProducts = rescue(async (_req, res) => {
   res
     .status(SUCCESS)
-    .json(await ProductsService.getAllProducts());
+    .json({ products: await ProductsService.getAllProducts() });
 });
 
 const getProductById = rescue(async (req, res) => {
