@@ -1,15 +1,24 @@
 const { ProductsController } = require('../controllers');
-const { isValidProductName } = require('../middlewares');
-
+// const {
+//   isValidQuantityProduct, 
+//   isValidNumberQuantity,
+//   isValidProductName} = require('../middlewares');
+  
 const { Router } = require('express');
 const ProductsRouter = Router();
 
 ProductsRouter.post('/',
-  isValidProductName,
+  // isValidProductName,
+  // isValidQuantityProduct,
+  // isValidNumberQuantity,
   ProductsController.registerNewProduct
 );
-// ProductsRouter.get('/', ProductsController);
-// ProductsRouter.get('/:id', ProductsController);
+ProductsRouter.get('/',
+  ProductsController.getAllProducts
+);
+ProductsRouter.get('/:id',
+  ProductsController.getProductById
+);
 // ProductsRouter.put('/:id', ProductsController);
 // ProductsRouter.delete('/:id', ProductsController);
 
