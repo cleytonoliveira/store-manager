@@ -35,9 +35,18 @@ const editProduct = rescue(async (req, res) => {
     .json(await ProductsService.editProduct(id, name, quantity));
 });
 
+const removeProduct = rescue(async (req, res) => {
+  const { id } = req.params;
+
+  res
+    .status(SUCCESS)
+    .json(await ProductsService.removeProduct(id));
+});
+
 module.exports = {
   registerNewProduct,
   getAllProducts,
   getProductById,
   editProduct,
+  removeProduct,
 };

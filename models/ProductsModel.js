@@ -6,27 +6,42 @@ const registerNewProduct = async (name, quantity) => {
     .then((db) => db.collection('products').insertOne({ name, quantity }));
 
   return {
-    id: insertedId,
+    _id: insertedId,
     name,
     quantity,
   };
 };
 
 const getAllProducts = async () => await connection()
-  .then((db) => db.collection('products').find().toArray());
+  .then((db) => db.collection('products')
+    .find().toArray());
 
 const getProductById = async (productId) => await connection()
-  .then((db) => db.collection('products').findOne(ObjectId(productId)));
+  .then((db) => db.collection('products')
+    .findOne(ObjectId(productId)));
 
 const editProduct = async (id, name, quantity) => {
   const { insertedId } = await connection()
-    .then((db) => db.collection('products').updateOne(
-      { _id: ObjectId(id) },
-      { $set: { name, quantity } }
-    ));
+    .then((db) => db.collection('products')
+      .updateOne(
+        { _id: ObjectId(id) },
+        { $set: { name, quantity } }
+      ));
   
   return {
-    id: insertedId,
+    _id: insertedId,
+    name,
+    quantity,
+  };
+};
+
+const removeProduct = async (productId) => {
+  const { value: { _id, name,quantity } } = await connection()
+    .then((db) => db.collection('products')
+      .findOneAndDelete({ _id: ObjectId(productId) }));
+
+  return {
+    _id,
     name,
     quantity,
   };
@@ -37,4 +52,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   editProduct,
+  removeProduct,
 };

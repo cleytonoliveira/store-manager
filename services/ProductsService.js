@@ -12,9 +12,13 @@ const getProductById = async (productId) => await ProductsModel
 const editProduct = async (id, name, quantity) => await ProductsModel
   .editProduct(id, name, quantity);
 
+const removeProduct = async (productId) => await ProductsModel
+  .removeProduct(productId);
+
 module.exports = {
   registerNewProduct,
   getAllProducts,
   getProductById,
   editProduct,
+  removeProduct,
 };
