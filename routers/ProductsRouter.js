@@ -19,7 +19,9 @@ ProductsRouter.get('/',
 ProductsRouter.get('/:id',
   ProductsController.getProductById
 );
-// ProductsRouter.put('/:id', ProductsController);
+ProductsRouter.put('/:id',
+  ProductsController.editProduct
+);
 // ProductsRouter.delete('/:id', ProductsController);
 
 module.exports = ProductsRouter;
