@@ -11,9 +11,9 @@ SalesRouter.get('/',
 SalesRouter.get('/:id',
   SalesController.getSaleById,
 );
-// SalesRouter.put('/:id',
-//   SalesController.editSale,
-// );
+SalesRouter.put('/:id',
+  SalesController.editSale,
+);
 // SalesRouter.delete('/:id',
 //   SalesController.removeSale,
 // );

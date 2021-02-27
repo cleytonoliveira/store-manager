@@ -25,14 +25,14 @@ const getSaleById = rescue(async (req, res) => {
     .json(await SalesService.getSaleById(id));
 });
 
-// const editSale = rescue(async (req, res) => {
-//   const { id } = req.params;
-//   const { productId, quantity } = req.body;
+const editSale = rescue(async (req, res) => {
+  const { id } = req.params;
+  const saleToUpdate= req.body;
 
-//   res
-//     .status(SUCCESS)
-//     .json(await SalesService.editSale(id, productId, quantity));
-// });
+  res
+    .status(SUCCESS)
+    .json(await SalesService.editSale(id, saleToUpdate));
+});
 
 // const removeSale = rescue(async (req, res) => {
 //   const { id } = req.params;
@@ -46,6 +46,6 @@ module.exports = {
   registerNewSale,
   getAllSales,
   getSaleById,
-  // editSale,
+  editSale,
   // removeSale,
 };

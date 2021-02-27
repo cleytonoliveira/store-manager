@@ -9,8 +9,10 @@ const getAllSales = async () => await SalesModel
 const getSaleById = async (saleId) => await SalesModel
   .getSaleById(saleId);
 
-// const editSale = async (id, productId, quantity) => await SalesModel
-//   .editSale(id, productId, quantity);
+const editSale = async (id, saleToUpdate) => {
+  return await SalesModel
+    .editSale(id, saleToUpdate);
+};
 
 // const removeSale = async (saleId) => await SalesModel
 //   .removeSale(saleId);
@@ -19,6 +21,6 @@ module.exports = {
   registerNewSale,
   getAllSales,
   getSaleById,
-  // editSale,
+  editSale,
   // removeSale,
 };

@@ -20,24 +20,17 @@ const getSaleById = async (saleId) => await connection()
   .then((db) => db.collection('sales')
     .findOne(ObjectId(saleId)));
 
-// const editSale = async (id, productId, quantity) => {
-//   const { insertedId } = await connection()
-//     .then((db) => db.collection('sales')
-//       .updateOne(
-//         { _id: ObjectId(id) },
-//         { $set: { productId, quantity } },
-//       ));
-  
-//   return {
-//     _id: insertedId,
-//     itensSold: [
-//       {
-//         productId,
-//         quantity,
-//       },
-//     ],
-//   };
-// };
+const editSale = async (id, saleToUpdate) => {
+  const { value } = await connection()
+    .then((db) => db.collection('sales')
+      .findOneAndUpdate(
+        { _id: ObjectId(id) },
+        { $set: { itensSold: saleToUpdate } },
+        { returnOriginal: false },
+      ));
+
+  return value;
+};
 
 // const removeSale = async (saleId) => {
 //   const { insertedId } = await connection()
@@ -53,6 +46,6 @@ module.exports = {
   registerNewSale,
   getAllSales,
   getSaleById,
-  // editSale,
+  editSale,
   // removeSale,
 };
