@@ -36,7 +36,7 @@ const editProduct = async (id, name, quantity) => {
 };
 
 const removeProduct = async (productId) => {
-  const { value: { _id, name,quantity } } = await connection()
+  const { value: { _id, name, quantity } } = await connection()
     .then((db) => db.collection('products')
       .findOneAndDelete({ _id: ObjectId(productId) }));
 

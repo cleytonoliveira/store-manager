@@ -3,13 +3,13 @@ const rescue = require('express-rescue');
 
 const SUCCESS = 200;
 
-// const registerNewSale = rescue(async (req, res) => {
-//   const { productId, quantity } = req.body;
+const registerNewSale = rescue(async (req, res) => {
+  const newSale = req.body;
 
-//   res
-//     .status(SUCCESS)
-//     .json(await SalesService.registerNewSale(productId, quantity));
-// });
+  res
+    .status(SUCCESS)
+    .json(await SalesService.registerNewSale(newSale));
+});
 
 const getAllSales = rescue(async (_req, res) => {
   res
@@ -25,8 +25,27 @@ const getSaleById = rescue(async (req, res) => {
     .json(await SalesService.getSaleById(id));
 });
 
+// const editSale = rescue(async (req, res) => {
+//   const { id } = req.params;
+//   const { productId, quantity } = req.body;
+
+//   res
+//     .status(SUCCESS)
+//     .json(await SalesService.editSale(id, productId, quantity));
+// });
+
+// const removeSale = rescue(async (req, res) => {
+//   const { id } = req.params;
+
+//   res
+//     .status(SUCCESS)
+//     .json(await SalesService.removeSale(id));
+// });
+
 module.exports = {
-  // registerNewSale,
+  registerNewSale,
   getAllSales,
   getSaleById,
+  // editSale,
+  // removeSale,
 };

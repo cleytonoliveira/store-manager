@@ -1,12 +1,7 @@
-const { SalesService } = require('.');
 const { SalesModel } = require('../models');
 
-// const registerNewSale = async (productId, quantity) => {
-//   const sale = await SalesModel
-//     .registerNewSale(productId, quantity);
-
-//   return sale;
-// };
+const registerNewSale = async (newSale) => await SalesModel
+  .registerNewSale(newSale);
 
 const getAllSales = async () => await SalesModel
   .getAllSales();
@@ -14,8 +9,16 @@ const getAllSales = async () => await SalesModel
 const getSaleById = async (saleId) => await SalesModel
   .getSaleById(saleId);
 
+// const editSale = async (id, productId, quantity) => await SalesModel
+//   .editSale(id, productId, quantity);
+
+// const removeSale = async (saleId) => await SalesModel
+//   .removeSale(saleId);
+
 module.exports = {
-  // registerNewSale,
+  registerNewSale,
   getAllSales,
   getSaleById,
+  // editSale,
+  // removeSale,
 };
