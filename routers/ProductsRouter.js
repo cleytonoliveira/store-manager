@@ -1,14 +1,14 @@
 const { ProductsController } = require('../controllers');
-// const {
+const {
   // isValidQuantityProduct, 
   // isValidNumberQuantity,
-  // isValidProductName} = require('../middlewares');
+  isValidProductName} = require('../middlewares');
   
 const { Router } = require('express');
 const ProductsRouter = Router();
 
 ProductsRouter.post('/',
-  // isValidProductName,
+  isValidProductName,
   // isValidQuantityProduct,
   // isValidNumberQuantity,
   ProductsController.registerNewProduct
@@ -20,6 +20,7 @@ ProductsRouter.get('/:id',
   ProductsController.getProductById
 );
 ProductsRouter.put('/:id',
+  isValidProductName,
   ProductsController.editProduct
 );
 ProductsRouter.delete('/:id',
