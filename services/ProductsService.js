@@ -23,8 +23,19 @@ const getProductById = async (productId) => {
 const editProduct = async (id, name, quantity) => await ProductsModel
   .editProduct(id, name, quantity);
 
-const removeProduct = async (productId) => await ProductsModel
-  .removeProduct(productId);
+const removeProduct = async (productId) => {
+  const productById = await ProductsModel
+    .removeProduct(productId);
+  
+  if (!productById) {
+    return {
+      error: true,
+      message: 'Wrong id format'
+    };
+  }
+
+  return productById;
+};
 
 module.exports = {
   registerNewProduct,

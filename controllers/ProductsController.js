@@ -22,15 +22,15 @@ const getAllProducts = rescue(async (_req, res) => {
 const getProductById = rescue(async (req, res, next) => {
   const { id } = req.params;
 
-  const ProductById = await ProductsService.getProductById(id);
+  const productById = await ProductsService.getProductById(id);
 
-  if (ProductById.error) {
-    throw (Boom.badData(ProductById.message));
+  if (productById.error) {
+    throw (Boom.badData(productById.message));
   }
 
   return res
     .status(SUCCESS)
-    .json(ProductById);
+    .json(productById);
 });
 
 const editProduct = rescue(async (req, res) => {
@@ -45,9 +45,15 @@ const editProduct = rescue(async (req, res) => {
 const removeProduct = rescue(async (req, res) => {
   const { id } = req.params;
 
-  res
+  const productById = await ProductsService.removeProduct(id);
+
+  if (productById.error) {
+    throw (Boom.badData(productById.message));
+  }
+
+  return res
     .status(SUCCESS)
-    .json(await ProductsService.removeProduct(id));
+    .json(productById);
 });
 
 module.exports = {
