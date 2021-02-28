@@ -1,6 +1,6 @@
 const { ProductsController } = require('../controllers');
 const {
-  // isValidQuantityProduct, 
+  isValidQuantityProduct, 
   // isValidNumberQuantity,
   isValidProductName} = require('../middlewares');
   
@@ -9,7 +9,7 @@ const ProductsRouter = Router();
 
 ProductsRouter.post('/',
   isValidProductName,
-  // isValidQuantityProduct,
+  isValidQuantityProduct,
   // isValidNumberQuantity,
   ProductsController.registerNewProduct
 );
@@ -21,6 +21,7 @@ ProductsRouter.get('/:id',
 );
 ProductsRouter.put('/:id',
   isValidProductName,
+  isValidQuantityProduct,
   ProductsController.editProduct
 );
 ProductsRouter.delete('/:id',
