@@ -12,5 +12,5 @@ module.exports = (err, _req, res, _next) => {
 
   return res
     .status(badImplementation)
-    .json({ message: err.message});
+    .json({ err: { code: 'invalid_data', message: err.message } });
 };

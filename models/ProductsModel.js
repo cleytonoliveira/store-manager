@@ -16,9 +16,13 @@ const getAllProducts = async () => await connection()
   .then((db) => db.collection('products')
     .find().toArray());
 
-const getProductById = async (productId) => await connection()
-  .then((db) => db.collection('products')
-    .findOne(ObjectId(productId)));
+const getProductById = async (productId) => {
+  if(!ObjectId.isValid(productId)) return null;
+
+  return await connection()
+    .then((db) => db.collection('products')
+      .findOne(ObjectId(productId)));
+};
 
 const editProduct = async (id, name, quantity) => {
   const { insertedId } = await connection()

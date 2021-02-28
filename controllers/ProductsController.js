@@ -1,5 +1,6 @@
 const { ProductsService } = require('../services');
 const rescue = require('express-rescue');
+const Boom = require('@hapi/boom');
 
 const CREATED = 201;
 const SUCCESS = 200;
@@ -18,12 +19,18 @@ const getAllProducts = rescue(async (_req, res) => {
     .json({ products: await ProductsService.getAllProducts() });
 });
 
-const getProductById = rescue(async (req, res) => {
+const getProductById = rescue(async (req, res, next) => {
   const { id } = req.params;
 
-  res
+  const ProductById = await ProductsService.getProductById(id);
+
+  if (ProductById.error) {
+    throw (Boom.badData(ProductById.message));
+  }
+
+  return res
     .status(SUCCESS)
-    .json(await ProductsService.getProductById(id));
+    .json(ProductById);
 });
 
 const editProduct = rescue(async (req, res) => {
