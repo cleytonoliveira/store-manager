@@ -1,7 +1,7 @@
 const { ProductsController } = require('../controllers');
 const {
   isValidQuantityProduct, 
-  // isValidNumberQuantity,
+  isValidNumberQuantity,
   isValidProductName} = require('../middlewares');
   
 const { Router } = require('express');
@@ -9,8 +9,8 @@ const ProductsRouter = Router();
 
 ProductsRouter.post('/',
   isValidProductName,
+  isValidNumberQuantity,
   isValidQuantityProduct,
-  // isValidNumberQuantity,
   ProductsController.registerNewProduct
 );
 ProductsRouter.get('/',
@@ -21,6 +21,7 @@ ProductsRouter.get('/:id',
 );
 ProductsRouter.put('/:id',
   isValidProductName,
+  isValidNumberQuantity,
   isValidQuantityProduct,
   ProductsController.editProduct
 );
