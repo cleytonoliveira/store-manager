@@ -32,20 +32,18 @@ const editSale = async (id, saleToUpdate) => {
   return value;
 };
 
-// const removeSale = async (saleId) => {
-//   const { insertedId } = await connection()
-//     .then((db) => db.collection('sales')
-//       .deleteOne({ _id: ObjectId(saleId) }));
+const removeSale = async (saleId) => {
+  const { value } = await connection()
+    .then((db) => db.collection('sales')
+      .findOneAndDelete({ _id: ObjectId(saleId) }));
   
-//   return {
-//     _id: insertedId,
-//   };
-// };
+  return value;
+};
 
 module.exports = {
   registerNewSale,
   getAllSales,
   getSaleById,
   editSale,
-  // removeSale,
+  removeSale,
 };

@@ -1,8 +1,8 @@
 const { ProductsController } = require('../controllers');
 // const {
-//   isValidQuantityProduct, 
-//   isValidNumberQuantity,
-//   isValidProductName} = require('../middlewares');
+  // isValidQuantityProduct, 
+  // isValidNumberQuantity,
+  // isValidProductName} = require('../middlewares');
   
 const { Router } = require('express');
 const ProductsRouter = Router();

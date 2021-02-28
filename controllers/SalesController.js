@@ -34,18 +34,18 @@ const editSale = rescue(async (req, res) => {
     .json(await SalesService.editSale(id, saleToUpdate));
 });
 
-// const removeSale = rescue(async (req, res) => {
-//   const { id } = req.params;
+const removeSale = rescue(async (req, res) => {
+  const { id } = req.params;
 
-//   res
-//     .status(SUCCESS)
-//     .json(await SalesService.removeSale(id));
-// });
+  res
+    .status(SUCCESS)
+    .json(await SalesService.removeSale(id));
+});
 
 module.exports = {
   registerNewSale,
   getAllSales,
   getSaleById,
   editSale,
-  // removeSale,
+  removeSale,
 };

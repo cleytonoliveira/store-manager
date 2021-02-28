@@ -14,13 +14,13 @@ const editSale = async (id, saleToUpdate) => {
     .editSale(id, saleToUpdate);
 };
 
-// const removeSale = async (saleId) => await SalesModel
-//   .removeSale(saleId);
+const removeSale = async (saleId) => await SalesModel
+  .removeSale(saleId);
 
 module.exports = {
   registerNewSale,
   getAllSales,
   getSaleById,
   editSale,
-  // removeSale,
+  removeSale,
 };
