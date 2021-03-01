@@ -1,5 +1,6 @@
 const { SalesService } = require('../services');
 const rescue = require('express-rescue');
+const Boom = require('@hapi/boom');
 
 const SUCCESS = 200;
 
@@ -20,9 +21,15 @@ const getAllSales = rescue(async (_req, res) => {
 const getSaleById = rescue(async (req, res) => {
   const { id } = req.params;
 
+  const saleById = await SalesService.getSaleById(id);
+
+  if (saleById.error) {
+    throw Boom.notFound(saleById.message);
+  }
+
   res
     .status(SUCCESS)
-    .json(await SalesService.getSaleById(id));
+    .json(saleById);
 });
 
 const editSale = rescue(async (req, res) => {

@@ -16,9 +16,13 @@ const getAllSales = async () => await connection()
   .then((db) => db.collection('sales')
     .find().toArray());
 
-const getSaleById = async (saleId) => await connection()
-  .then((db) => db.collection('sales')
-    .findOne(ObjectId(saleId)));
+const getSaleById = async (saleId) => {
+  if (!ObjectId.isValid(saleId)) return null;
+
+  return await connection()
+    .then((db) => db.collection('sales')
+      .findOne(ObjectId(saleId)));
+};
 
 const editSale = async (id, saleToUpdate) => {
   const { value } = await connection()

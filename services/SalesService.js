@@ -6,8 +6,19 @@ const registerNewSale = async (newSale) => await SalesModel
 const getAllSales = async () => await SalesModel
   .getAllSales();
 
-const getSaleById = async (saleId) => await SalesModel
-  .getSaleById(saleId);
+const getSaleById = async (saleId) => {
+  const saleById = await SalesModel
+    .getSaleById(saleId);
+
+  if (!saleById) {
+    return {
+      error: true,
+      message: 'Sale not found',
+    };
+  }
+
+  return saleById;
+};
 
 const editSale = async (id, saleToUpdate) => {
   return await SalesModel

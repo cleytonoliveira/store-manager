@@ -11,7 +11,7 @@ const registerNewProduct = rescue(async (req, res) => {
   const newProduct = await ProductsService.registerNewProduct(name, quantity);
 
   if (newProduct.error) {
-    throw (Boom.badData(newProduct.message));
+    throw Boom.badData(newProduct.message);
   }
 
   res
@@ -31,7 +31,7 @@ const getProductById = rescue(async (req, res, next) => {
   const productById = await ProductsService.getProductById(id);
 
   if (productById.error) {
-    throw (Boom.badData(productById.message));
+    throw Boom.badData(productById.message);
   }
 
   return res
@@ -54,7 +54,7 @@ const removeProduct = rescue(async (req, res) => {
   const productById = await ProductsService.removeProduct(id);
 
   if (productById.error) {
-    throw (Boom.badData(productById.message));
+    throw Boom.badData(productById.message);
   }
 
   return res
