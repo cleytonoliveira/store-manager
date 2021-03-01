@@ -1,7 +1,20 @@
 const { ProductsModel } = require('../models');
 
-const registerNewProduct = async (name, quantity) => await ProductsModel
-  .registerNewProduct(name, quantity);
+const registerNewProduct = async (name, quantity) => {
+  const productStock = await ProductsModel.getAllProducts();
+
+  const productAlreadyExist = productStock.some(product => product.name === name);
+
+  if (productAlreadyExist) {
+    return {
+      error: true,
+      message: 'Product already exists',
+    };
+  }
+
+  return await ProductsModel
+    .registerNewProduct(name, quantity);
+};
 
 const getAllProducts = async () => await ProductsModel
   .getAllProducts();

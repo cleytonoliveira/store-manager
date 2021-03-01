@@ -8,9 +8,15 @@ const SUCCESS = 200;
 const registerNewProduct = rescue(async (req, res) => {
   const { name, quantity } = req.body;
 
+  const newProduct = await ProductsService.registerNewProduct(name, quantity);
+
+  if (newProduct.error) {
+    throw (Boom.badData(newProduct.message));
+  }
+
   res
     .status(CREATED)
-    .json(await ProductsService.registerNewProduct(name, quantity));
+    .json(newProduct);
 });
 
 const getAllProducts = rescue(async (_req, res) => {
