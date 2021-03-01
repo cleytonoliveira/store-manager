@@ -1,8 +1,10 @@
 const { Router } = require('express');
 const SalesRouter = Router();
 const { SalesController } = require('../controllers');
+const { isValidSale } = require('../middlewares');
 
 SalesRouter.post('/',
+  isValidSale,
   SalesController.registerNewSale
 );
 SalesRouter.get('/',
@@ -12,6 +14,7 @@ SalesRouter.get('/:id',
   SalesController.getSaleById,
 );
 SalesRouter.put('/:id',
+  isValidSale,
   SalesController.editSale,
 );
 SalesRouter.delete('/:id',
