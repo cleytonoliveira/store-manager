@@ -44,9 +44,15 @@ const editSale = rescue(async (req, res) => {
 const removeSale = rescue(async (req, res) => {
   const { id } = req.params;
 
-  res
+  const saleById = await SalesService.removeSale(id);
+
+  if(saleById.error) {
+    throw Boom.badData(saleById.message);
+  }
+
+  return res
     .status(SUCCESS)
-    .json(await SalesService.removeSale(id));
+    .json(saleById);
 });
 
 module.exports = {

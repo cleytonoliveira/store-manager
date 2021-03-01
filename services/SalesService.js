@@ -25,8 +25,19 @@ const editSale = async (id, saleToUpdate) => {
     .editSale(id, saleToUpdate);
 };
 
-const removeSale = async (saleId) => await SalesModel
-  .removeSale(saleId);
+const removeSale = async (saleId) => {
+  const saleById = await SalesModel
+    .removeSale(saleId);
+
+  if(!saleById) {
+    return {
+      error: true,
+      message: 'Wrong sale ID format',
+    };
+  }
+
+  return saleById;
+};
 
 module.exports = {
   registerNewSale,
