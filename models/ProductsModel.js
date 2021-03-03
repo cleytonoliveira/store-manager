@@ -53,10 +53,18 @@ const removeProduct = async (productId) => {
   };
 };
 
+const updateQuantityProduct = async (productId, quantity) => await connection()
+  .then((db) => db.collection('products')
+    .updateMany(
+      { _id: ObjectId(productId) },
+      { $inc: { quantity: - quantity } }
+    ));
+
 module.exports = {
   registerNewProduct,
   getAllProducts,
   getProductById,
   editProduct,
   removeProduct,
+  updateQuantityProduct
 };

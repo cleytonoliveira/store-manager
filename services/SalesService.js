@@ -1,7 +1,13 @@
-const { SalesModel } = require('../models');
+const { SalesModel, ProductsModel } = require('../models');
 
-const registerNewSale = async (newSale) => await SalesModel
-  .registerNewSale(newSale);
+const registerNewSale = async (newSale) => {
+  newSale.forEach(async (sale) => {
+    return await ProductsModel.updateQuantityProduct(sale.productId, sale.quantity);
+  });
+
+  return await SalesModel
+    .registerNewSale(newSale);
+};
 
 const getAllSales = async () => await SalesModel
   .getAllSales();
