@@ -2,7 +2,7 @@ const { SalesModel, ProductsModel } = require('../models');
 
 const registerNewSale = async (newSale) => {
   newSale.forEach(async (sale) => {
-    return await ProductsModel.updateQuantityProduct(sale.productId, sale.quantity);
+    return await ProductsModel.subtractQuantityProduct(sale.productId, sale.quantity);
   });
 
   return await SalesModel
@@ -34,13 +34,17 @@ const editSale = async (id, saleToUpdate) => {
 const removeSale = async (saleId) => {
   const saleById = await SalesModel
     .removeSale(saleId);
-
+  
   if(!saleById) {
     return {
       error: true,
       message: 'Wrong sale ID format',
     };
   }
+
+  saleById.itensSold.forEach(async (product) => {
+    await ProductsModel.sumQuantityProduct(product.productId, product.quantity);
+  });
 
   return saleById;
 };

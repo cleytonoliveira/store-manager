@@ -53,11 +53,18 @@ const removeProduct = async (productId) => {
   };
 };
 
-const updateQuantityProduct = async (productId, quantity) => await connection()
+const subtractQuantityProduct = async (productId, quantity) => await connection()
   .then((db) => db.collection('products')
     .updateMany(
       { _id: ObjectId(productId) },
       { $inc: { quantity: - quantity } }
+    ));
+
+const sumQuantityProduct = async (productId, quantity) => await connection()
+  .then((db) => db.collection('products')
+    .updateMany(
+      { _id: ObjectId(productId) },
+      { $inc: { quantity: quantity } },
     ));
 
 module.exports = {
@@ -66,5 +73,6 @@ module.exports = {
   getProductById,
   editProduct,
   removeProduct,
-  updateQuantityProduct
+  subtractQuantityProduct,
+  sumQuantityProduct,
 };
