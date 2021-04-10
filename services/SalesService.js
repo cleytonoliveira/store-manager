@@ -41,6 +41,7 @@ const getSaleById = async (saleId) => {
   if (!saleById) {
     return {
       error: true,
+      code: 'not_found',
       message: 'Sale not found',
     };
   }
@@ -60,6 +61,7 @@ const removeSale = async (saleId) => {
   if(!saleById) {
     return {
       error: true,
+      code: 'invalid_data',
       message: 'Wrong sale ID format',
     };
   }

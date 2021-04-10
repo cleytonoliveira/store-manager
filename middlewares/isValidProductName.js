@@ -10,7 +10,9 @@ module.exports = (req, _res, next) => {
   const isValid = error === null;
 
   if (!isValid) {
-    return next(Boom.badData('"name" length must be at least 5 characters long'));
+    return next(Boom
+      .badData('"name" length must be at least 5 characters long',
+        { code: 'invalid_data' }));
   }
 
   next();

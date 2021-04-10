@@ -5,10 +5,11 @@ module.exports = (err, _req, res, _next) => {
 
   if (Boom.isBoom(err)) {
     const { statusCode, payload } = err.output;
+    const { code } = err.data;
 
     return res
       .status(statusCode)
-      .json({ err: { code: err.data, message: payload.message } });
+      .json({ err: { code, message: payload.message } });
   };
 
   return res

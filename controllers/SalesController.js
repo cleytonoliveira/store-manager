@@ -10,7 +10,7 @@ const registerNewSale = rescue(async (req, res) => {
   const registerSale = await SalesService.registerNewSale(newSale);
 
   if (registerSale.error) {
-    throw Boom.notFound(registerSale.message, registerSale.code);
+    throw Boom.notFound(registerSale.message, { code: registerSale.code });
   }
 
   res 
@@ -30,7 +30,7 @@ const getSaleById = rescue(async (req, res) => {
   const saleById = await SalesService.getSaleById(id);
 
   if (saleById.error) {
-    throw Boom.notFound(saleById.message);
+    throw Boom.notFound(saleById.message, { code: saleById.code });
   }
 
   res
@@ -53,7 +53,7 @@ const removeSale = rescue(async (req, res) => {
   const saleById = await SalesService.removeSale(id);
 
   if(saleById.error) {
-    throw Boom.badData(saleById.message);
+    throw Boom.badData(saleById.message, { code: saleById.code });
   }
 
   return res

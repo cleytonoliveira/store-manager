@@ -11,7 +11,8 @@ module.exports = (req, _res, next) => {
     const isValid = error === null;
   
     if (!isValid) {
-      return next(Boom.badData('Wrong product ID or invalid quantity'));
+      return next(Boom
+        .badData('Wrong product ID or invalid quantity', { code: 'invalid_data' }));
     }
   });
 

@@ -10,7 +10,8 @@ module.exports = (req, _res, next) => {
   const isValid = error === null;
   
   if (!isValid) {
-    return next(Boom.badData('"quantity" must be larger than or equal to 1'));
+    return next(Boom
+      .badData('"quantity" must be larger than or equal to 1', { code: 'invalid_data' }));
   }
 
   next();

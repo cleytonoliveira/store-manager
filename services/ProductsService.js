@@ -8,6 +8,7 @@ const registerNewProduct = async (name, quantity) => {
   if (productAlreadyExist) {
     return {
       error: true,
+      code: 'invalid_data',
       message: 'Product already exists',
     };
   }
@@ -26,6 +27,7 @@ const getProductById = async (productId) => {
   if (!productById) {
     return {
       error: true,
+      code: 'invalid_data',
       message: 'Wrong id format'
     };
   }
@@ -43,6 +45,7 @@ const removeProduct = async (productId) => {
   if (!productById) {
     return {
       error: true,
+      code: 'invalid_data',
       message: 'Wrong id format'
     };
   }

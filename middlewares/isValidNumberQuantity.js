@@ -9,7 +9,7 @@ module.exports = (req, _res, next) => {
   const isValid = error === null;
 
   if (!isValid) {
-    return next(Boom.badData('"quantity" must be a number'));
+    return next(Boom.badData('"quantity" must be a number', { code: 'invalid_data' }));
   }
 
   next();
