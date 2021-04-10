@@ -7,9 +7,15 @@ const SUCCESS = 200;
 const registerNewSale = rescue(async (req, res) => {
   const newSale = req.body;
 
-  res
+  const registerSale = await SalesService.registerNewSale(newSale);
+
+  if (registerSale.error) {
+    throw Boom.notFound(registerSale.message, registerSale.code);
+  }
+
+  res 
     .status(SUCCESS)
-    .json(await SalesService.registerNewSale(newSale));
+    .json(registerSale);
 });
 
 const getAllSales = rescue(async (_req, res) => {

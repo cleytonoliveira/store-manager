@@ -1,9 +1,31 @@
 const { SalesModel, ProductsModel } = require('../models');
 
 const registerNewSale = async (newSale) => {
-  newSale.forEach(async (sale) => {
-    return await ProductsModel.subtractQuantityProduct(sale.productId, sale.quantity);
+  let isProductInStock = true;
+
+  const verifyProductInStock = newSale.map(async (sale) => {
+    const minQuantity = 0;
+
+    const { quantity } = await ProductsModel
+      .getProductById(sale.productId);
+
+    const quantityDifference = quantity - sale.quantity;
+
+    if (quantityDifference < minQuantity) return isProductInStock = false;
+
+    return await ProductsModel
+      .subtractQuantityProduct(sale.productId, sale.quantity);
   });
+
+  await Promise.all(verifyProductInStock);
+
+  if (!isProductInStock) {
+    return {
+      error: true,
+      code: 'stock_problem',
+      message: 'Such amount is not permitted to sell',
+    };
+  }
 
   return await SalesModel
     .registerNewSale(newSale);

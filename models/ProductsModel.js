@@ -55,7 +55,7 @@ const removeProduct = async (productId) => {
 
 const subtractQuantityProduct = async (productId, quantity) => await connection()
   .then((db) => db.collection('products')
-    .updateMany(
+    .findOneAndUpdate(
       { _id: ObjectId(productId) },
       { $inc: { quantity: - quantity } }
     ));
